@@ -22,13 +22,13 @@ require_once 'db_connect.php';
     <link rel"stylesheet" type="text/css" href"common.css">
   </head>
   <body>
-    <?php echo $thread_id ?>//なぜ入らん！
     <?php echo $_GET["errtxt"]; ?>
     <h1>コメント作成</h1>
     <form method="POST" action="comment_action.php">
     <p> コメント<br>
     <textarea name="content" rows="4" cols="40" placeholder="ここにコメントを記入してください"></textarea></p>
     <input type="hidden" name="token" value="<?php echo session_id(); ?>">
+    <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>">
     <p>
       <input type="submit" value="投稿" name="submit">
     </form>

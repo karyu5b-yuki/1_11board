@@ -5,7 +5,7 @@ require_once 'db_connect.php';
 ?>
 <?php
   $stmt = $dbh->prepare('SELECT * FROM threads WHERE id=?');
-  $stmt->execute(array($_GET["thread_id"]));//どこからとった？なぜこれでwhere 一行上のidに直接入る？
+  $stmt->execute(array($_GET["thread_id"]));
   $thread=$stmt->fetch(PDO::FETCH_ASSOC);
   //restmtなに
   $restmt = $dbh->prepare('SELECT * FROM comments WHERE thread_id=?');
@@ -14,7 +14,7 @@ require_once 'db_connect.php';
 
 <!DOCTYPE html>
 
-<html lnag="ja">
+<html lang="ja">
 
   <head>
     <meta charset="utf-8"></meta>

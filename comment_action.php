@@ -10,10 +10,10 @@
         echo $userid, $content, $thread_id;
 
         $stmt = $dbh->prepare("insert into comments (users_id, content, threads_id) values (:userid, :content, :thread_id)");
-        $stmt->bindParam(":users_id",$userid);
+        $stmt->bindParam(":userid",$userid);
         $stmt->bindParam(":content",$content);
         $stmt->bindParam(":thread_id",$thread_id);
-        $stmt->execute();//エラー出る
+        $stmt->execute();
         $dbh = null;
         $message= "編集完了！";
         // header("Location:comment.php");
@@ -26,7 +26,6 @@
 ?>
 
     <!DOCTYPE html>
-    <!-- //またでない -->
 
     <html lang="ja">
     <head>

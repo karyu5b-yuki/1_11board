@@ -8,8 +8,10 @@ require_once 'db_connect.php';
   $stmt->execute(array($_GET["thread_id"]));
   $thread=$stmt->fetch(PDO::FETCH_ASSOC);
   //restmtなに
-  $restmt = $dbh->prepare('SELECT * FROM comments WHERE thread_id=?');
-  $restmt->execute(array($_GET["thread_id"]));
+  $stmt = $dbh->prepare('SELECT * FROM comments WHERE threads_id=?');
+  $stmt->execute(array($_GET["thread_id"]));
+  $comment = $stmt->fetch(PDO::FETCH_ASSOC);
+
 ?>
 <!DOCTYPE html>
 
@@ -20,6 +22,13 @@ require_once 'db_connect.php';
     <link rel"stylesheet" type="text/css" href"common.css">
   </head>
   <body>
+    <script>
+    function submitChk () {
+        var flag = confirm ("送信してもよろしいですか？\n\n送信したくない場合は[キャンセル]ボタンを押して下さい");
+        /* send_flg が TRUEなら送信、FALSEなら送信しない */
+        return flag;
+    }
+</script>
     <h1>Title：<?php echo htmlspecialchars($thread['title']); ?></h1>
     <h5> login: <?php echo "$userid"; ?>さん</h5>
     <a href= "top.php">スレッド一覧に戻る</a>
@@ -35,27 +44,25 @@ require_once 'db_connect.php';
       <a href='./thread_edit.php?thread_id=<?php echo $thread['id']?>'><span style="padding-right:10px;">編集</span></a>
       <form method="post" action="thread_edit.php?thread_id=<?php echo $thread['id']?>">
       <a href='./thread_delete.php?thread_id=<?php echo $thread['id']?>'>削除</a>
-      <form method="post" action="thread_delete.php?thread_id=<?php echo $thread['id']?>">
+      <form method="post" action="thread_delete.php?thread_id=<?php echo $thread['id']?>" >
     </div>
     <?php endif; ?>
 
 
     <h3>コメント</h3>
-<!-- ここの対応！ -->
     <fieldset>
       <ol>
-        <?php foreach($restmt->fetchAll(PDO::FETCH_ASSOC) as $commentinfo):?>
-          <li class="thread">
-            <?php echo htmlspecialchars($commentinfo["content"]);?>
-            <?php if($commentinfo["users_id"]==$userid):?>
-            <a href='./thread_edit.php?comment_id=<?php echo $commentinfo['id']?>&type=res'>編集</a>//&type=resとは
-            <form method="post" action="delete.php">
-              <p>
+        <?php foreach($stmt->fetchAll(PDO::FETCH_ASSOC) as $comment):?>
+          <li class="comment">
+            <?php echo nl2br($comment["content"]);?>　
+
+            <?php if($comment["users_id"]==$userid):?>
+            <a href='./thread_edit.php?comment_id=<?php echo $comment['id']?>'>編集</a>
+            <form method="post" action="comment_delete_action.php">
                 <input type="submit" name="delete" value="削除">
-              </p>
-                <input type="hidden" name="thread_id" value=<?php echo $thread['id'];?>>//確認
+                <input type="hidden" name="thread_id_com" value="<?php echo $thread['id'];?>">
             </form>
-            <?php endif; ?>//end処理確認
+            <?php endif; ?>
           </li>
         <?php endforeach; ?>
       </ol>
