@@ -1,12 +1,12 @@
 <?php
     session_start();
-    $commentid = _$GET
     require_once 'db_connect.php';
-    $stmt = $dbh->prepare("delete from comments where id =?";
-    $stmt->execute(array($_GET["thread_id"]));
+    $stmt = $dbh->prepare('DELETE FROM comments WHERE id =?');
+    $stmt->execute(array($_POST["thread_id"]));
     $dbh = null;
-        header("Location:top.php");
-        exit();
+    $message = 'スレッドを消去できました';
+    // header("Location:top.php");
+
 ?>
 
 <!DOCTYPE html>
@@ -17,6 +17,9 @@
 </head>
 <body>
   <div>削除されました</div>
+  <a href="top.php">トップ画面に戻る</a>
+
+  <?php echo $_POST["thread_id"]?>
 </body>
 </html>
 

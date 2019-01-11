@@ -16,11 +16,10 @@
         $stmt->execute();
         $dbh = null;
         $message= "編集完了！";
-        // header("Location:comment.php");
-        // exit();
-}else{
+
+  }else{
     $err_msg = 'コメントを入力してください';
-    header("Location:comment.php?errtxt=EnptyError!");
+    // header("Location:comment.php?errtxt=EnptyError!");//$err_msg = 'コメントを入力してください';を、ここで運びたい。
     exit();
 }
 ?>
@@ -34,7 +33,7 @@
       <link rel"stylesheet" type="text/css" href"common.css">
     </head>
     <body>
-      <?php echo $errorMessage?>
+      <?php echo $err_msg?>
       <?php echo $message?>
       <a href="thread.php?thread_id=<?php echo $thread_id ?>">スレッド画面に戻る</a>
     </body>

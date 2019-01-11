@@ -1,12 +1,9 @@
 <?php
     session_start();
-    $thread_id_com = $_POST["thread_id_edit"];
+    // $thread_id_com = $_POST["thread_id_edit"];
     require_once 'db_connect.php';
-    $stmt = $dbh->prepare("DELETE FROM threads WHERE id=?");
-    $stmt->execute(array($_POST["thread_id_edit"]));
-    $dbh = null;
     $stmt = $dbh->prepare("DELETE FROM comments WHERE id=?");
-    $stmt->execute(array($_POST["thread_id_com"]));
+    $stmt->execute(array($_POST["comment_id"]));
     $dbh = null;
 ?>
 
@@ -18,6 +15,6 @@
 </head>
 <body>
   <div>削除されました</div>
-  <a href="thread.php?thread_id=<?php echo $thread_id_com ?>">スレッド画面に戻る</a>
+  <a href="thread.php?thread_id=<?php echo $_POST["thread_id"]?>">  スレッド画面に戻る</a>
 </body>
 </html>

@@ -31,8 +31,8 @@ require_once 'db_connect.php';
     <input type="hidden" name="thread_id" value="<?php echo $thread_id; ?>">
     <p>
       <input type="submit" value="投稿" name="submit">
-    </form>
-      <input type="submit" value="キャンセル" name="cancel"><br>
+      <input type="reset" value="キャンセル"><br>
+      </form>
     <a href="thread.php?thread_id=<?php echo $thread_id ?>">スレッド画面に戻る</a>
     </p>
 

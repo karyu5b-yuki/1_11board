@@ -7,7 +7,6 @@ require_once 'db_connect.php';
   $stmt = $dbh->prepare('SELECT * FROM threads WHERE id=?');
   $stmt->execute(array($_GET["thread_id"]));
   $thread=$stmt->fetch(PDO::FETCH_ASSOC);
-  //restmtなに
   $restmt = $dbh->prepare('SELECT * FROM comments WHERE thread_id=?');
   $restmt->execute(array($_GET["thread_id"]));
 ?>
@@ -19,7 +18,7 @@ require_once 'db_connect.php';
   <head>
     <meta charset="utf-8"></meta>
     <title>スレッド編集</title>
-    <link rel"stylesheet" type="text/css" href"common.css">
+    <!-- <link rel"stylesheet" type="text/css" href"common.css"> -->
   </head>
   <body>
     <h1>スレッド編集</h1>
@@ -35,8 +34,8 @@ require_once 'db_connect.php';
     <p>
       <input type="submit" value="編集" name="edit">
     </form>
-      <input type="submit" value="キャンセル" name="cancel"><br>
-      <a href="thread.php?thread_id=<?php echo $thread_id ?>">スレッド画面に戻る</a>
+      <input type="reset" value="キャンセル" name="cancel"><br>
+      <a href="thread.php?thread_id=<?php echo $thread['id'] ?>">スレッド画面に戻る</a>
     </p>
 
   </body>

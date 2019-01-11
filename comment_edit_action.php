@@ -1,15 +1,13 @@
 <?php
     session_start();
-        $userid =$_SESSION["userid"];
-        $title =$_POST["title"];
+        $err_msg = "";
         $content =$_POST["content"];
-        $thread_id = $_POST["thread_id"];
+        $comment_id = $_POST["comment_id"];
         require_once 'db_connect.php';
 
-        $stmt = $dbh->prepare("update threads set title=:title, content=:content where id=:id");
-        $stmt->bindParam(":title",$title);
+        $stmt = $dbh->prepare("update comments set content=:content where id=:id");
         $stmt->bindParam(":content",$content);
-        $stmt->bindParam(":id",$thread_id);
+        $stmt->bindParam(":id",$comment_id);
         $stmt->execute();
         $dbh = null;
         $message= "編集完了！";
@@ -25,7 +23,9 @@
       <link rel"stylesheet" type="text/css" href"common.css">
     </head>
     <body>
-      <?php echo $message ?>
-      <a href="thread.php?thread_id=<?php echo $thread_id ?>">スレッド画面に戻る</a>
+      <?php echo $err_msg ?>
+      <?php echo $message?>
+      <a href="thread.php?thread_id=<?php echo $_POST["thread_id"]?>">  スレッド画面に戻る</a>
+
     </body>
     </html>
