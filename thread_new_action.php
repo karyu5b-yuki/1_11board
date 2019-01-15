@@ -13,9 +13,8 @@
         $stmt->bindParam(":content",$content);
         $stmt->execute();
         $dbh = null;
-        //リダイレクト(成功時main.php,失敗時再度thread_new.php)
 
-            header("Location:top.php");
+            header("Location:top.php?newthread=投稿されました");//URLがダサく見えてしまう
             exit();
     }else{
         $err_msg = 'タイトルを入力してください';
@@ -23,23 +22,3 @@
         exit();
     }
 ?>
-
-<?php
-if(isset($_POST['submit'])){
-  $str = '投稿されました';
-}else{
-  $str = '投稿されていません';
-}
-?>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <title>投稿結果</title>
-</head>
-<body>
-  <div><?php echo($str) ?></div>
-</body>
-</html>*/
-
-//  header("Location:main.php?id=".$row["threadId"]);

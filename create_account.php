@@ -11,14 +11,14 @@
   <form action= "create_account_action.php" method="POST">
     <?php echo htmlspecialchars($_GET["errormessage"]); ?>
   <p> Username<br/>
-    <input type="text" name="name" size="40"/>
+    <input type="text" name="name" size="40" required>
   </p>
   <p> Mail Address<br/>
-    <input type="text" name="email" size="40"/>
+    <input type="email" name="email" size="40">
   </p>
   <p> Password<br/>
     <input type="hidden" name="token" value="<?php echo session_id(); ?>"></p>
-    <input type="password" name="password" size="40"/>
+    <input type="password" name="password" size="40"required>
   </p>
   <p>
     <input type="submit" value="CREATE" name="create">

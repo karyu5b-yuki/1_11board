@@ -1,5 +1,5 @@
 <?php
-    //require_once();
+require_once 'session_check.php';
 
     session_start();
     $userid = $_SESSION["userid"];
@@ -18,30 +18,26 @@
       <link rel="stylesheet" href = "common.css">
     </head>
     <body>
+      <h6> <?php echo $GET_["$newthread"] ?></h6>
+      <!-- ↑表示されない -->
       <h2>TOP: スレッド一覧</h2>
       <h3><a href= "thread_new.php">新規スレッド作成</a></h3>
 
       <form action="thread_new.php" method="post">
-      <ol class = "thread_list">
-      <h2>スレッド一覧<br></h2>
-      <?php
-      foreach ($threads as $thread): ?>
-      <?php $title = $thread['title'];
-            $name = $thread['name'];
-            $id = $thread['id'];
-           ?>
+        <ol class = "thread_list">
+        <h2>スレッド一覧<br></h2>
+        <?php
+        foreach ($threads as $thread): ?>
+        <?php $title = $thread['title'];
+              $name = $thread['name'];
+              $id = $thread['id'];
+              ?>
 
-    <span><a href=thread.php?thread_id=<?php echo $id; ?>></span>
-    『<?php echo htmlspecialchars($title);?>』by_<?php echo htmlspecialchars($name);?><br></a>
-    <form method="get" action="thread.php">
-     <?php endforeach ?>
+      <span><a href=thread.php?thread_id=<?php echo $id; ?>></span>
+      『<?php echo htmlspecialchars($title);?>』by_<?php echo htmlspecialchars($name);?><br></a>
+    <?php endforeach ?>
 
-
-    <?php
-    /*if ($userid = $thread['id']){
-    <a href= "thread_edit.php?>num= <?php echo $thread['id'];?>"edit</a>
-    <form action="" method="post">*/?>
-</form>
+      </form>
   <h5><a href= "login.php">ログアウト</a></h5>
   </body>
 </html>
