@@ -54,6 +54,7 @@
         <input type="hidden" name="token" value="<?php echo session_id(); ?>"></p>
         <?php echo $err_msg2; ?>
         <p>
+          
           <input type="submit" value="LogIn" name="login">
           <input type="submit" value="キャンセル" name="cancel"></p>
           <p>
